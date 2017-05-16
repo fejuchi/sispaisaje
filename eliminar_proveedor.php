@@ -9,7 +9,8 @@ if($_SESSION['ok']=="ok")
 			$nit = $_GET['nit'];	
 			include("conexion.php");
 			$con=conectarse();
-			$con->query("DELETE FROM proveedores WHERE nit='$nit'");
+			$con->query("DELETE FROM proveedor WHERE nit_proveedor='$nit'");
+			header("Location: proveedores.php");
 		}		
 		
 	}

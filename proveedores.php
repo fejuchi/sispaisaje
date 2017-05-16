@@ -20,7 +20,7 @@ if($_SESSION['ok']=="ok")
 		<h1><a>Proveedores</a></h1>
 		<form id="form_1075005" class="appnitro"  method="post" action="proveedores.php">
 					<div class="form_description">
-			<h2>Proveedores</h2><a title=" Registrar Proveedor Nuevo? " href="registrar_proveedor.php">  <img src="css/newc.jpg">  </a>
+			<h2>Proveedores</h2><a title=" Registrar Proveedor Nuevo? " href="registrar_proveedor.php"><img src="css/newc.jpg"> ¿Nuevo proveedor? </a>
 			<p></p>
 		</div>						
 			<ul >
@@ -73,7 +73,7 @@ if($_SESSION['ok']=="ok")
 			include("conexion.php");
 			$con=conectarse();
 			$nit=$_POST['nit'];
-			$result=$con->query("SELECT * FROM proveedores WHERE nit='$nit'");
+			$result=$con->query("SELECT * FROM proveedor WHERE nit_proveedor='$nit'");
 			
 	?>
 	
@@ -95,7 +95,6 @@ if($_SESSION['ok']=="ok")
 		 <td align="center">DIRECCION</td>
 		 <td align="center">TELEFONO</td>
 		 <td align="center">EMAIL</td>
-		 <td align="center">< - --- - ></td>
 		</tr>
 		
 		<?php
@@ -103,12 +102,12 @@ if($_SESSION['ok']=="ok")
 		?>
 			
 			<tr>
-			 <td align="center"><?php echo $row['nit']; ?></td>
+			 <td align="center"><?php echo $row['nit_proveedor']; ?></td>
 			 <td align="center"><?php echo $row['nombre'];?></td>
 			 <td align="center"><?php echo $row['telefono']; ?></td>
 			 <td align="center"><?php echo $row['direccion']; ?></td>
 			 <td align="center"><?php echo $row['email']; ?></td>
-			 <td align="center"><a title=" Eliminar? " href="eliminar_proveedor.php?nit=<?php echo $row['nit']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_proveedor.php?nit=<?php echo $row['nit']; ?>">  <img src="css/edit.jpg">  </a> </td>
+			 <td align="center"><a title=" Eliminar? " href="eliminar_proveedor.php?nit=<?php echo $row['nit_proveedor']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_proveedor.php?nit=<?php echo $row['nit_proveedor']; ?>">  <img src="css/edit.jpg">  </a> </td>
 			</tr>
 			<tr>
 				<td align="center" colspan="6"><a href="proveedores.php"><--</a></td>
@@ -131,7 +130,7 @@ if($_SESSION['ok']=="ok")
 			include("conexion.php");
 			$con=conectarse();
 			
-			$result=$con->query("SELECT * FROM proveedores");
+			$result=$con->query("SELECT * FROM proveedor");
 			
 	?>
 	
@@ -162,12 +161,12 @@ if($_SESSION['ok']=="ok")
 		?>
 			
 			<tr>
-			 <td align="center"><?php echo $row['nit']; ?></td>
+			 <td align="center"><?php echo $row['nit_proveedor']; ?></td>
 			 <td align="center"><?php echo $row['nombre'];?></td>
 			 <td align="center"><?php echo $row['telefono']; ?></td>
 			 <td align="center"><?php echo $row['direccion']; ?></td>
 			 <td align="center"><?php echo $row['email']; ?></td>
-			 <td align="center"><a title=" Eliminar? " href="eliminar_proveedor.php?nit=<?php echo $row['nit']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_proveedor.php?nit=<?php echo $row['nit']; ?>">  <img src="css/edit.jpg">  </a> </td>
+			 <td align="center"><a title=" Eliminar? " href="eliminar_proveedor.php?nit=<?php echo $row['nit_proveedor']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_proveedor.php?nit=<?php echo $row['nit_proveedor']; ?>">  <img src="css/edit.jpg">  </a> </td>
 			</tr>
 		<?php
 		}

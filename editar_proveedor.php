@@ -11,7 +11,7 @@ if(isset($_GET['nit']))
 	include("conexion.php");
 	$con=conectarse();
 	$nit=$_GET['nit'];
-	$result=$con->query("SELECT * FROM proveedores WHERE nit='$nit'");
+	$result=$con->query("SELECT * FROM proveedor WHERE nit_proveedor='$nit'");
 	$row = $result->fetch_array();
 ?>
 <head>
@@ -37,7 +37,7 @@ if(isset($_GET['nit']))
 		<li id="li_1" >
 		<label class="description" for="element_1">NIT </label>
 		<div>
-			<input id="cc" name="nit" class="element text medium" type="text" maxlength="255" value="<?php echo $row['nit']; ?>" readonly /> 
+			<input id="cc" name="nit" class="element text medium" type="text" maxlength="255" value="<?php echo $row['nit_proveedor']; ?>" readonly /> 
 		</div> 
 		</li>
 		<li id="li_2" >
@@ -91,7 +91,8 @@ else
 		$telefono=$_POST['telefono'];
 		$direccion=$_POST['direccion'];
 		$email=$_POST['email'];		
-		$result=$con->query("UPDATE proveedores SET nombre='$nombre', telefono='$telefono', direccion='$direccion', email='$email' WHERE nit='$nit'");
+		$result=$con->query("UPDATE proveedor SET nombre='$nombre', telefono='$telefono', direccion='$direccion', email='$email' WHERE nit_proveedor='$nit'");
+		header("Location: proveedores.php");
 	}
 ?>
 	<meta http-equiv='refresh' content='1; url=proveedores.php' />

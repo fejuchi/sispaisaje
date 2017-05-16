@@ -23,11 +23,12 @@ $telefono=$_POST['telefono'];
 $direccion=$_POST['direccion'];
 $email=$_POST['email'];
 
-$result=$con->query("INSERT INTO proveedores(nit, nombre, telefono, direccion, email) 
+$result=$con->query("INSERT INTO proveedor(nit_proveedor, nombre, telefono, direccion, email) 
 VALUES ('$nit', '$nombre', '$telefono', '$direccion', '$email')");
 if($result>=1)
 {
 	echo "<center><h1> DATOS ALMACENADOS CON EXITOS</h1></center>";
+	header("Location: proveedores.php");
 }
 else
 {

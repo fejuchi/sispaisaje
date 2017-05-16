@@ -19,15 +19,15 @@ $con=conectarse();
 
 $id=$_POST['id'];
 $nombre=$_POST['nombre'];
-$stockmin=$_POST['stockmin'];
-$stockmax=$_POST['stockmax'];
-$stockactual=$_POST['stockactual'];	
-$preciocompra=$_POST['preciocompra'];	
+$tamano=$_POST['tamano'];
+$preciocosto=$_POST['preciocosto'];
 $precioventa=$_POST['precioventa'];	
-$proveedor=$_POST['proveedor'];
+$categoria=$_POST['categoria'];	
+$proveedor=$_POST['proveedor'];	
 
-$result=$con->query("INSERT INTO productos(id, nombre, stockmin, stockmax, stockactual, preciocompra, precioventa, nitproveedor) 
-VALUES ('$id', '$nombre', '$stockmin', '$stockmax', '$stockactual', '$preciocompra', '$precioventa', '$proveedor')");
+
+$result=$con->query("INSERT INTO producto(codigo_producto, nombre, tamano, precio_costo, precio_venta, codigo_categoria, nit_proveedor) 
+VALUES ('$id', '$nombre', '$tamano', '$preciocosto', '$precioventa', '$categoria', '$proveedor')");
 if($result>=1)
 {
 	echo "<center><h1> DATOS ALMACENADOS CON EXITOS</h1></center>";

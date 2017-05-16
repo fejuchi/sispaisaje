@@ -25,12 +25,7 @@ if($_SESSION['ok']=="ok")
 		</div>						
 			<ul >
 			
-					<li id="li_1" >
-		<label class="description" for="element_1">ID </label>
-		<div>
-			<input id="cc" name="id" class="element text medium" type="text" maxlength="255" value="" required /> 
-		</div> 
-		</li>					
+				
 					<li class="buttons">
 			    <input type="hidden" name="form_id" value="1075005" />
 			    
@@ -73,7 +68,7 @@ if($_SESSION['ok']=="ok")
 			include("conexion.php");
 			$con=conectarse();
 			$id=$_POST['id'];
-			$result=$con->query("SELECT p.*, p2.nombre as nom FROM productos p inner join proveedores p2 on p.nitproveedor=p2.nit WHERE p.id='$id'");
+			$result=$con->query("SELECT * FROM producto WHERE codigo_producto='$id' ");
 			
 	?>
 	
@@ -91,12 +86,11 @@ if($_SESSION['ok']=="ok")
 				
 		<tr bgcolor="#FF8000">
 		 <td align="center">ID</td>
-		 <td align="center">NOMBRE</td>
-		 <td align="center">STOCK MINIMO</td>
-		 <td align="center">STOCK MAXIMO</td>
-		 <td align="center">STOCK ACTUAL</td>
-		 <td align="center">PRECIO COMPRA</td>
+		 <td align="center">NOMBRE PRODUCTO</td>
+		 <td align="center">TAMAÑO</td>
+		 <td align="center">PRECIO COSTO</td>
 		 <td align="center">PRECIO VENTA</td>
+		 <td align="center">CATEGORIA</td>
 		 <td align="center">PROVEEDOR</td>
 		 <td align="center">< - --- - ></td>
 		</tr>
@@ -106,15 +100,14 @@ if($_SESSION['ok']=="ok")
 		?>
 			
 			<tr>
-			 <td align="center"><?php echo $row['id']; ?></td>
+			 <td align="center"><?php echo $row['codigo_producto']; ?></td>
 			 <td align="center"><?php echo $row['nombre'];?></td>
-			 <td align="center"><?php echo $row['stockmin']; ?></td>
-			 <td align="center"><?php echo $row['stockmax']; ?></td>
-			 <td align="center"><?php echo $row['stockactual']; ?></td>
-			 <td align="center"><?php echo $row['preciocompra']; ?></td>
-			 <td align="center"><?php echo $row['precioventa']; ?></td>
-			 <td align="center"><?php echo $row['nom']; ?></td>
-			 <td align="center"><a title=" Eliminar? " href="eliminar_producto.php?id=<?php echo $row['id']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_producto.php?id=<?php echo $row['id']; ?>">  <img src="css/edit.jpg">  </a> </td>
+			 <td align="center"><?php echo $row['tamano']; ?></td>
+			 <td align="center"><?php echo $row['precio_costo']; ?></td>
+			 <td align="center"><?php echo $row['precio_venta']; ?></td>
+			 <td align="center"><?php echo $row['codigo_categoria']; ?></td>
+			 <td align="center"><?php echo $row['nit_proveedor']; ?></td>
+			 <td align="center"><a title=" Eliminar? " href="eliminar_producto.php?id=<?php echo $row['codigo_producto']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_producto.php?id=<?php echo $row['codigo_producto']; ?>">  <img src="css/edit.jpg">  </a> </td>
 			</tr>
 			<tr>
 				<td align="center" colspan="9"><a href="productos.php"><--</a></td>
@@ -137,7 +130,7 @@ if($_SESSION['ok']=="ok")
 			include("conexion.php");
 			$con=conectarse();
 			
-			$result=$con->query("SELECT p.*, p2.nombre as nom FROM productos p inner join proveedores p2 on p.nitproveedor=p2.nit");
+			$result=$con->query("SELECT * FROM producto");
 			
 	?>
 	
@@ -156,13 +149,12 @@ if($_SESSION['ok']=="ok")
 		<tr bgcolor="#FF8000">
 		 <td align="center">ID</td>
 		 <td align="center">NOMBRE</td>
-		 <td align="center">STOCK MINIMO</td>
-		 <td align="center">STOCK MAXIMO</td>
-		 <td align="center">STOCK ACTUAL</td>
-		 <td align="center">PRECIO COMPRA</td>
+		 <td align="center">TAMAÑO</td>
+		 <td align="center">PRECIO COSTO</td>
 		 <td align="center">PRECIO VENTA</td>
+		 <td align="center">CATEGORIA</td>
 		 <td align="center">PROVEEDOR</td>
-		 <td align="center">< - --- - ></td>
+		 
 		</tr>
 		
 		<?php
@@ -171,15 +163,15 @@ if($_SESSION['ok']=="ok")
 		?>
 			
 			<tr>
-			 <td align="center"><?php echo $row['id']; ?></td>
+			 <td align="center"><?php echo $row['codigo_producto']; ?></td>
 			 <td align="center"><?php echo $row['nombre'];?></td>
-			 <td align="center"><?php echo $row['stockmin']; ?></td>
-			 <td align="center"><?php echo $row['stockmax']; ?></td>
-			 <td align="center"><?php echo $row['stockactual']; ?></td>
-			 <td align="center"><?php echo $row['preciocompra']; ?></td>
-			 <td align="center"><?php echo $row['precioventa']; ?></td>
-			 <td align="center"><?php echo $row['nom']; ?></td>
-			 <td align="center"><a title=" Eliminar? " href="eliminar_producto.php?id=<?php echo $row['id']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_producto.php?id=<?php echo $row['id']; ?>">  <img src="css/edit.jpg">  </a> </td>
+			 <td align="center"><?php echo $row['tamano']; ?></td>
+			 <td align="center"><?php echo $row['precio_costo']; ?></td>
+			 <td align="center"><?php echo $row['precio_venta']; ?></td>
+			 <td align="center"><?php echo $row['codigo_categoria']; ?></td>
+			 <td align="center"><?php echo $row['nit_proveedor']; ?></td>
+			 
+			 <td align="center"><a title=" Eliminar? " href="eliminar_producto.php?id=<?php echo $row['codigo_producto']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_producto.php?id=<?php echo $row['codigo_producto']; ?>">  <img src="css/edit.jpg">  </a> </td>
 			</tr>
 		<?php
 		}

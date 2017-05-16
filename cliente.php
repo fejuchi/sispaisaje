@@ -7,7 +7,7 @@ if($_SESSION['ok']=="ok")
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Planta De Personal</title>
+<title>Clientes</title>
 <link rel="stylesheet" type="text/css" href="css/view.css" media="all">
 <script type="text/javascript" src="view.js"></script>
 
@@ -18,9 +18,9 @@ if($_SESSION['ok']=="ok")
 	<div id="form_container">
 	
 		<h1><a>Lista de Clientes</a></h1>
-		<form id="form_1075005" class="appnitro"  method="post" action="personal.php">
+		<form id="form_1075005" class="appnitro"  method="post" action="cliente.php">
 					<div class="form_description">
-			<h2>Lista de Clientes</h2><a title=" Registrar Personal Nuevo? " href="registrar_personal.php">  <img src="css/newc.jpg">  </a>
+			<h2>Lista de Clientes</h2><a title=" Registrar Nuevo Cliente? " href="registrar_cliente.php">  <img src="css/newc.jpg">  </a>
 			<p></p>
 		</div>						
 			<ul >
@@ -28,7 +28,7 @@ if($_SESSION['ok']=="ok")
 					<li id="li_1" >
 		<label class="description" for="element_1">Nombre del cliente </label>
 		<div>
-			<input id="usuario" name="usuario" class="element text medium" type="text" maxlength="255" value="" required /> 
+			<input id="nombre" name="nombre" class="element text medium" type="text" maxlength="255" value="" required /> 
 		</div> 
 		</li>					
 					<li class="buttons">
@@ -37,11 +37,9 @@ if($_SESSION['ok']=="ok")
 				<input id="saveForm" class="button_text" type="submit" name="submit" value="Buscar" />
 		</li>
 			</ul>
-			
 		
 		</form>	
 		<div id="footer">
-			
 		</div>
 	</div>
 		
@@ -71,8 +69,8 @@ if($_SESSION['ok']=="ok")
 		{
 			include("conexion.php");
 			$con=conectarse();
-			$usuario=$_POST['usuario'];
-			$result=$con->query("SELECT * FROM usuario WHERE usuario='$usuario'");
+			$nombre=$_POST['nombre'];
+			$result=$con->query("SELECT * FROM cliente WHERE nombre='$nombre'");
 	?>
 	
 	<img id="top" src="css/top.png" alt="">
@@ -84,15 +82,13 @@ if($_SESSION['ok']=="ok")
 		?>
 		
 		<table id="form_1075005" class="appnitro" cellspacing="25" cellpadding="10">
-		
-				
 		<tr bgcolor="#FF8000">
-		<td align="center">CODIGO</td>
+		<td align="center">NIT</td>
 		<td align="center">NOMBRE</td>
-		<td align="center">CARGO</td>
-		<td align="center">FECHA REGISTRO</td>
-		<td align="center">USUARIO</td>
-		<td align="center">TIPO DE USUARIO</td>
+		<td align="center">DIRECCION</td>
+		<td align="center">TELEFONO</td>
+		<td align="center">EMAIL</td>
+		<td align="center">MUNICIPIO</td>
 		<td align="center">< - --- - ></td>
 		</tr>
 		
@@ -101,16 +97,16 @@ if($_SESSION['ok']=="ok")
 		?>
 			
 			<tr>
-			 <td align="center"><?php echo $row['codigo_usuario']; ?></td>
+			 <td align="center"><?php echo $row['nit_cliente']; ?></td>
 			 <td align="center"><?php echo $row['nombre'].' '.$row['apellido']; ?></td>
-			 <td align="center"><?php echo $row['cargo']; ?></td>
-			 <td align="center"><?php echo $row['fecha']; ?></td>
-			 <td align="center"><?php echo $row['usuario']; ?></td>
-			 <td align="center"><?php echo $row['tipousuario']; ?></td>
-			 <td align="center"><a title=" Eliminar? " href="eliminar_personal.php? usuario=<?php echo $row['usuario']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_personal.php? usuario=<?php echo $row['usuario']; ?>">  <img src="css/edit.jpg">  </a> </td>
+			 <td align="center"><?php echo $row['direccion']; ?></td>
+			 <td align="center"><?php echo $row['telefono']; ?></td>
+			 <td align="center"><?php echo $row['email']; ?></td>
+			 <td align="center"><?php echo $row['codigo_mun']; ?></td>
+			 <td align="center"><a title=" Eliminar? " href="eliminar_cliente.php? nombre=<?php echo $row['nombre']; ?>"><font size='5' color="#FF8071"></font></a>&nbsp <a title=" Editar? " href="editar_cliente.php? nombre=<?php echo $row['nombre']; ?>">  <img src="css/edit.jpg">  </a> </td>
 			</tr>
 			<tr>
-				<td align="center" colspan="5"><a href="personal.php"><--</a></td>
+				<td align="center" colspan="5"><a href="cliente.php"><--</a></td>
 			</tr>
 		</table>	
 		
@@ -130,7 +126,7 @@ if($_SESSION['ok']=="ok")
 			include("conexion.php");
 			$con=conectarse();
 			
-			$result=$con->query("SELECT * FROM usuario");
+			$result=$con->query("SELECT * FROM cliente");
 			
 	?>
 	
@@ -147,12 +143,12 @@ if($_SESSION['ok']=="ok")
 		<table id="form_1075005" class="appnitro" cellspacing="25" cellpadding="5">
 		
 		<tr bgcolor="#FF8000">
-		<td align="center">CODIGO</td>
+		<td align="center">NIT</td>
 		<td align="center">NOMBRE</td>
-		<td align="center">CARGO</td>
-		<td align="center">FECHA REGISTRO</td>
-		<td align="center">USUARIO</td>
-		<td align="center">TIPO DE USUARIO</td>
+		<td align="center">DIRECCION</td>
+		<td align="center">TELEFONO</td>
+		<td align="center">EMAIL</td>
+		<td align="center">MUNICIPIO</td>
 		<td align="center">< - --- - ></td>
 		</tr>
 		
@@ -162,13 +158,14 @@ if($_SESSION['ok']=="ok")
 		?>
 			
 			<tr>
-			 <td align="center"><?php echo $row['codigo_usuario']; ?></td>
+
+			 <td align="center"><?php echo $row['nit_cliente']; ?></td>
 			 <td align="center"><?php echo $row['nombre'].' '.$row['apellido']; ?></td>
-			 <td align="center"><?php echo $row['cargo']; ?></td>
-			 <td align="center"><?php echo $row['fecha']; ?></td>
-			 <td align="center"><?php echo $row['usuario']; ?></td>
-			 <td align="center"><?php echo $row['tipousuario']; ?></td>
-			 <td align="center"><a title=" Eliminar? " href="eliminar_personal.php? usuario=<?php echo $row['usuario']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_personal.php? usuario=<?php echo $row['usuario']; ?>">  <img src="css/edit.jpg">  </a> </td>
+			 <td align="center"><?php echo $row['direccion']; ?></td>
+			 <td align="center"><?php echo $row['telefono']; ?></td>
+			 <td align="center"><?php echo $row['email']; ?></td>
+			 <td align="center"><?php echo $row['codigo_mun']; ?></td>
+			 <td align="center"><a title=" Eliminar? " href="eliminar_cliente.php? nombre=<?php echo $row['nombre']; ?>"><font size='5' color="#FF8071"></font></a>&nbsp <a title=" Editar? " href="editar_cliente.php? nombre=<?php echo $row['nombre']; ?>">  <img src="css/edit.jpg">  </a> </td>
 			</tr>
 
 		<?php

@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `categoria` (
-  `codigo_categoria` int(11) NOT NULL,
+  `codigo_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(15) NOT NULL,
   PRIMARY KEY (`codigo_categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -154,7 +154,7 @@ DROP TABLE IF EXISTS `departamento`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `departamento` (
-  `codigo_dep` int(11) NOT NULL,
+  `codigo_dep` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(15) NOT NULL,
   PRIMARY KEY (`codigo_dep`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -177,9 +177,9 @@ DROP TABLE IF EXISTS `detalle_compras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `detalle_compras` (
-  `codigo_detalle_co` int(11) NOT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  `precio` decimal(10,0) DEFAULT NULL,
+  `codigo_detalle_co` int(11) NOT NULL AUTO_INCREMENT,
+  `cantidad` int(11) NOT NULL,
+  `precio` decimal(10,0) NOT NULL,
   `nit_proveedor` int(11) NOT NULL,
   `nofactura` int(11) NOT NULL,
   PRIMARY KEY (`codigo_detalle_co`),
@@ -205,9 +205,9 @@ DROP TABLE IF EXISTS `detalle_factura`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `detalle_factura` (
-  `codigo_detalle_fac` int(11) NOT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  `precio` decimal(10,0) DEFAULT NULL,
+  `codigo_detalle_fac` int(11) NOT NULL AUTO_INCREMENT,
+  `cantidad` int(11) NOT NULL,
+  `precio` decimal(10,0) NOT NULL,
   `codigo_producto` int(11) NOT NULL,
   `no_factura` int(11) NOT NULL,
   PRIMARY KEY (`codigo_detalle_fac`),
@@ -233,7 +233,7 @@ DROP TABLE IF EXISTS `devolucion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `devolucion` (
-  `codigo_devolucion` int(11) NOT NULL,
+  `codigo_devolucion` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(15) NOT NULL,
   `fecha` date NOT NULL,
   `cantidad` int(11) NOT NULL,
@@ -292,10 +292,10 @@ DROP TABLE IF EXISTS `inventario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `inventario` (
-  `codigo_inventario` int(11) NOT NULL,
+  `codigo_inventario` int(11) NOT NULL AUTO_INCREMENT,
   `existencia` int(11) NOT NULL,
-  `minimo` int(11) DEFAULT NULL,
-  `maximo` int(11) DEFAULT NULL,
+  `minimo` int(11) NOT NULL,
+  `maximo` int(11) NOT NULL,
   `codigo_producto` int(11) NOT NULL,
   PRIMARY KEY (`codigo_inventario`),
   KEY `fk_inventario_producto1_idx` (`codigo_producto`)
@@ -319,7 +319,7 @@ DROP TABLE IF EXISTS `municipio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `municipio` (
-  `codigo_mun` int(11) NOT NULL,
+  `codigo_mun` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) NOT NULL,
   `codigo_dep` int(11) NOT NULL,
   PRIMARY KEY (`codigo_mun`),
@@ -400,7 +400,7 @@ DROP TABLE IF EXISTS `tipo_pago`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tipo_pago` (
-  `idpago` int(11) NOT NULL,
+  `idpago` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(15) NOT NULL,
   PRIMARY KEY (`idpago`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -432,7 +432,7 @@ CREATE TABLE `usuario` (
   `clave` varchar(15) NOT NULL,
   `tipousuario` varchar(15) NOT NULL,
   PRIMARY KEY (`codigo_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -441,7 +441,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Fernando','Julajuj Chiroy','Supervisor','2017-05-13','fejuchi','123','Administrador'),(3,'Richard Dinael','Tzoc Lacan','Gerente','2017-05-15','dinael','123','Administrador'),(4,'Edwin','Juracan Tos','Supervisor','2017-05-15','admin','123','Administrador');
+INSERT INTO `usuario` VALUES (1,'Fernando','Julajuj Chiroy','Gerente','2017-05-13','fejuchi','123','Administrador');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -454,4 +454,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-15 10:58:54
+-- Dump completed on 2017-05-15 22:52:31

@@ -71,6 +71,7 @@ if($_SESSION['ok']=="ok")
 		<label class="description" for="element_4">Proveedor </label>
 		<div>
 			<select name="proveedor" required>
+			
 			<?php
 			include("conexion.php");
 			$con=conectarse();

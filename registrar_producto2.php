@@ -11,7 +11,6 @@ h1   {color:#0174DF}
 </style>
 
 <?php
-
 if(isset($_POST['submit']))
 {
 include("conexion.php");

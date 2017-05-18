@@ -5,10 +5,13 @@ if($_SESSION['ok']=="ok")
 {
 ?>
 
+
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Registrar Cliente</title>
+
 <link rel="stylesheet" type="text/css" href="css/view.css" media="all">
 <script type="text/javascript" src="view.js"></script>
 </head>
@@ -61,21 +64,27 @@ if($_SESSION['ok']=="ok")
 		</div> 
 		</li>	
 
-		<select name="" id="">
+		<li id="li_6" >
+		<label class="description" for="element_6">Municipio </label>
+		<div>
+			<select name="codigo_mun" required>
+			
 			<?php
-			include("conexion.php");	
+			include("conexion.php");
 			$con=conectarse();
-			$sql="SELECT codigo_mun, nombre FROM municipio";
-			$stmt=$con->prepare($sql);
-			$result=$stmt->execute();
-			$rows=$stmt->fetchAll(\PDO::FETCH_OBJ);
-			foreach ($rows as $row) {
+			$result=$con->query("SELECT * FROM municipio");
+			while($row = $result->fetch_array())
+			{
+				echo "<option  value='".$row["codigo_mun"]."'>".$row["nombre"]."</option>"; 
+			}
 			?>
-			<option value="<?php print($row->nombre); ?>"><?php print($row->nombre); ?></option>
-				<?php 
-				}
-			?>
-		</select>
+			</select>
+		</div> 
+		</li>
+		
+
+
+
 
 		<li class="buttons">
 		<input type="hidden" name="form_id" value="1075005" />

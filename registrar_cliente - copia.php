@@ -19,7 +19,7 @@ if($_SESSION['ok']=="ok")
 	<div id="form_container">
 	
 		<h1><a>Registrar Cliente</a></h1>
-		<form id="form_1075005" name="form5" class="appnitro"  method="post" action="registrar_cliente2.php">
+		<form id="form_1075005" class="appnitro"  method="post" action="registrar_cliente2.php">
 			<div class="form_description">
 			<h2>Registrar Cliente</h2>
 			<p></p>
@@ -63,17 +63,23 @@ if($_SESSION['ok']=="ok")
 		</li>
 
 
-						<?php
-							include("conexion.php");
-							$con=conectarse();	
-							$result=$con->query("SELECT * FROM departamento order by nombre asc");
-						?>
 
-					<li id="li_6" >
-					<label class="description" for="element_6">Departamento </label>
+
+
+	</ul>
+		</form>
+
+		<?php
+		include("conexion.php");
+		$con=conectarse();	
+		$result=$con->query("SELECT * FROM departamento order by nombre asc");
+	?>
+
+			<ul>
+				<form id="form_1075005" name="form5" action="" class="appnitro"  method="post" action="registrar_cliente2.php">
+					<label class="description" for="element_7">Departamento </label>
 					<div>
-						<select class="" id="departamento" name="departamento"  onchange="from(document.form5.departamento.value,'midiv','registrar_cliente2.php')" required>
-
+						<select class="" name="departamento" id="departamento" onchange="from(document.form5.departamento.value,'midiv','municipio.php')" required>
 							<option value="0">Seleccione</option>
 							<?php while ($row=mysqli_fetch_array($result)){ ?>
 							<option value="<?php echo $row['codigo_dep']?>"><?php echo $row['nombre']?></option>
@@ -82,34 +88,15 @@ if($_SESSION['ok']=="ok")
 					</div>
 					<div id="midiv">
 					</div>
-					</li>
-
-
-					<?php
-						include("conexion.php");
-						$con=conectarse();	
-						$result=$con->query("SELECT * FROM municipio where codigo_dep=".$_GET['id']);
-					?>
-						<br>
-					<li id="li_7" >
-						<label class="description" for="element_7">Municipio </label>
-						<div>
-						<select class="" id="municipio"  name="municipio" required>	
-							<?php while ($row=mysqli_fetch_array($result)){ ?>
-							<option value="<?php echo $row['codigo_mun']?>"><?php echo $row['nombre']?></option>
-							<?php }?>
-						</select>
-						</div>
-					</li>
-
 
 					<li class="buttons">
 					<input type="hidden" name="form_id" value="1075005" />
 					<input id="saveForm" class="button_text" type="submit" name="submit" value="Registrar" />
 					</li>
 
-	</ul>
-		</form>
+				</form>	
+			</ul>
+
 					<div id="footer">
 					</div>
 	</div>

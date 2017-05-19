@@ -1,9 +1,9 @@
 <?php
 
 $dbh = mysql_connect("localhost","root" ,"");
-$db = mysql_select_db("pollos");
+$db = mysql_select_db("flor_del_paisaje");
 
-$consulta = "SELECT * from personal WHERE cc = ".$_GET['cc'];
+$consulta = "SELECT * from usuario WHERE codigo_usuario = ".$_GET['codigo_usuario'];
 $query = mysql_query($consulta);
 $fila = mysql_fetch_array($query);
     while ($fila = mysql_fetch_array($query)) {

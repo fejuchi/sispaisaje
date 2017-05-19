@@ -7,7 +7,7 @@ if(isset($_GET['id']))
 $id = $_GET['id'];	
 include("conexion.php");
 $con=conectarse();
-$con->query("DELETE FROM productos WHERE id='$id'");
+$con->query("DELETE FROM producto WHERE codigo_producto='$id'");
 }
 }
 else

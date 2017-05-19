@@ -34,6 +34,7 @@ if($_SESSION['ok']=="ok")
 	<td><a href="proveedores.php">PROVEEDORES</a></td>
 	<td><a href="ventas.php">VENTAS</a></td>
 	<td><a href="compras.php">COMPRAS</a></td>
+	<td><a href="registrar_municipio.php">MUNICIPIOS</a></td>
 	</tr>
 	</table>
 	

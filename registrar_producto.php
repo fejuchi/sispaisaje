@@ -27,45 +27,49 @@ if($_SESSION['ok']=="ok")
 			
 		<li id="li_1" >
 		<label class="description" for="element_1">ID </label>
-		<div>
-			<input id="cc" name="id" class="element text medium" type="text" maxlength="255" value="" required /> 
-		</div> 
+		<span>
+			<input id="codigo_producto" name= "id" class="element text" maxlength="255" size="20" value="" required />
+			<label>Codigo de Barra</label>
 		</li>		
 		<li id="li_2" >
-		<label class="description" for="element_3">Nombre </label>
+		<label class="description" for="element_2">Nombre Producto</label>
 		<div>
 			<input id="cargo" name="nombre" class="element text medium" type="text" maxlength="255" value="" required /> 
 		</div> 
 		</li>		
 		<li id="li_3" >
-		<label class="description" for="element_4">Stock Minimo </label>
+		<label class="description" for="element_3">Tamaño </label>
 		<div>
-			<input id="password" name="stockmin" class="element text medium" type="text" maxlength="255" value="" required /> 
+			<input id="password" name="tamano" class="element text medium" type="text" maxlength="255" value="" required /> 
 		</div> 
 		</li>
 		<li id="li_4" >
-		<label class="description" for="element_4">Stock Maximo </label>
+		<label class="description" for="element_4">Precio Costo </label>
 		<div>
-			<input id="password" name="stockmax" class="element text medium" type="text" maxlength="255" value="" required /> 
+			<input id="password" name="preciocosto" class="element text medium" type="text" maxlength="255" value="" required /> 
 		</div> 
 		</li>
 		<li id="li_5" >
-		<label class="description" for="element_4">Stock Actual </label>
-		<div>
-			<input id="password" name="stockactual" class="element text medium" type="text" maxlength="255" value="" required /> 
-		</div> 
-		</li>
-		<li id="li_6" >
-		<label class="description" for="element_4">Precio Compra </label>
-		<div>
-			<input id="password" name="preciocompra" class="element text medium" type="text" maxlength="255" value="" required /> 
-		</div> 
-		</li>
-		<li id="li_5" >
-		<label class="description" for="element_4">Precio Venta </label>
+		<label class="description" for="element_5">Precio venta </label>
 		<div>
 			<input id="password" name="precioventa" class="element text medium" type="text" maxlength="255" value="" required /> 
 		</div> 
+		</li>
+
+		<li id="li_6" >
+		<label class="description" for="element_6">Categoria </label>
+		<div>
+			<input id="password" name="categoria" class="element text medium" type="text" maxlength="255" value="" required /> 
+		</div> 
+		</li>
+
+		<li id="li_7" >
+
+			<label class="description" for="element_7">Proveedor </label>
+		<div>
+			<input id="password" name="proveedor" class="element text medium" type="text" maxlength="255" value="" required /> 
+		</div> 
+<<<<<<< HEAD
 		</li>
 		<li id="li_5" >
 		<label class="description" for="element_4">Proveedor </label>
@@ -82,8 +86,18 @@ if($_SESSION['ok']=="ok")
 			}
 			?>
 			</select>
+=======
+		</li
+
+			
+>>>>>>> a44e7af924d60afe7c56c11feff2ca82ca75f8b8
 		</div> 
 		</li>
+
+
+
+		
+		
 			
 					<li class="buttons">
 			    <input type="hidden" name="form_id" value="1075005" />

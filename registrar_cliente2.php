@@ -22,11 +22,11 @@ $apellido=$_POST['apellido'];
 $direccion=$_POST['direccion'];
 $telefono=$_POST['telefono'];
 $email=$_POST['email'];
-$codigo_mun=$_POST['codigo_mun'];
+$codigo_dep=$_POST['departamento'];
 
 
 $result=$con->query("INSERT INTO cliente (nit_cliente, nombre, apellido, direccion,  telefono, email, codigo_mun) 
-	VALUES ('$nit_cliente', '$nombre', '$apellido', '$direccion', '$telefono, '$email', '$codigo_mun')");
+	VALUES ('$nit_cliente', '$nombre', '$apellido', '$direccion', '$telefono, '$email', '$codigo_dep')");
 
 if($result>=1)
 {

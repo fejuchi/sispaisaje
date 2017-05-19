@@ -11,7 +11,7 @@ if(isset($_GET['id']))
 	include("conexion.php");
 	$con=conectarse();
 	$id=$_GET['id'];
-	$result=$con->query("SELECT * FROM productos WHERE id='$id'");
+	$result=$con->query("SELECT * FROM producto WHERE codigo_producto='$id'");
 	$row = $result->fetch_array();
 ?>
 <head>
@@ -36,9 +36,9 @@ if(isset($_GET['id']))
 			
 		<li id="li_1" >
 		<label class="description" for="element_1">ID </label>
-		<div>
-			<input id="cc" name="id" class="element text medium" type="text" maxlength="255" value="<?php echo $row['id']; ?>" readonly /> 
-		</div> 
+		<span>
+			<input id="codigo_producto" name= "id" class="element text" maxlength="255" size="20" value="<?php echo $row['codigo_producto']; ?>" required />
+			<label>Codigo de Barra</label>
 		</li>
 		<li id="li_2" >
 		<label class="description" for="element_1">Nombre </label>
@@ -47,52 +47,38 @@ if(isset($_GET['id']))
 		</div> 
 		</li>			
 		<li id="li_3" >
-		<label class="description" for="element_3">Stock Minimo </label>
+		<label class="description" for="element_3">Tamaño </label>
 		<div>
-			<input id="cargo" name="stockmin" class="element text medium" type="text" maxlength="255" value="<?php echo $row['stockmin']; ?>" required /> 
+			<input id="cargo" name="tamano" class="element text medium" type="text" maxlength="255" value="<?php echo $row['tamano']; ?>" required /> 
 		</div> 
 		</li>
 		<li id="li_4" >
-		<label class="description" for="element_4">Stock Maximo </label>
+		<label class="description" for="element_4">Precio Costo </label>
 		<div>
-			<input id="password" name="stockmax" class="element text medium" type="text" maxlength="255" value="<?php echo $row['stockmax']; ?>" required /> 
+			<input id="password" name="preciocosto" class="element text medium" type="text" maxlength="255" value="<?php echo $row['precio_costo']; ?>" required /> 
 		</div> 
 		</li>
 		<li id="li_6" >
-		<label class="description" for="element_4">Stock Actual </label>
+		<label class="description" for="element_6">Precio Venta </label>
 		<div>
-			<input id="password" name="stockactual" class="element text medium" type="text" maxlength="255" value="<?php echo $row['stockactual']; ?>" required /> 
+			<input id="password" name="precioventa" class="element text medium" type="text" maxlength="255" value="<?php echo $row['precio_venta']; ?>" required /> 
 		</div> 
 		</li>
 		<li id="li_7" >
-		<label class="description" for="element_4">Precio Compra </label>
+		<label class="description" for="element_7">Categoria </label>
 		<div>
-			<input id="password" name="preciocompra" class="element text medium" type="text" maxlength="255" value="<?php echo $row['preciocompra']; ?>" required /> 
+			<input id="password" name="categoria" class="element text medium" type="text" maxlength="255" value="<?php echo $row['codigo_categoria']; ?>" required /> 
 		</div> 
 		</li>
-		<li id="li_8" >
-		<label class="description" for="element_4">Precio Venta </label>
+
+		<li id="li_7" >
+		<label class="description" for="element_7">Peoveedor </label>
 		<div>
-			<input id="password" name="precioventa" class="element text medium" type="text" maxlength="255" value="<?php echo $row['precioventa']; ?>" required /> 
+			<input id="password" name="proveedor" class="element text medium" type="text" maxlength="255" value="<?php echo $row['nit_proveedor']; ?>" required /> 
 		</div> 
 		</li>
-		<li id="li_9" >
-		<label class="description" for="element_4">Proveedor</label>
-		<div>
-			<select name="proveedor" required>
-			<?php			
-			$result2=$con->query("SELECT * FROM proveedores");
-			while($row2 = $result2->fetch_array())
-			{
-				?>
-				 <option  value="<?php echo $row2['nit']; ?>"  <?php if($row['nitproveedor'] == $row2['nit']){ ?> selected <?php } ?> > <?php echo $row2['nombre']; ?> </option> 
-				<?php
-			}
-			?>
-			</select> 
-		</div> 
-		</li>
-			
+		
+					
 					<li class="buttons">
 			    <input type="hidden" name="form_id" value="1075005" />
 			    
@@ -116,13 +102,12 @@ else
 	    $con=conectarse();
 		$id=$_POST['id'];
 		$nombre=$_POST['nombre'];
-		$stockmin=$_POST['stockmin'];
-		$stockmax=$_POST['stockmax'];
-		$stockactual=$_POST['stockactual'];	
-		$preciocompra=$_POST['preciocompra'];	
-		$precioventa=$_POST['precioventa'];	
-		$proveedor=$_POST['proveedor'];			
-		$result=$con->query("UPDATE productos SET nombre='$nombre', stockmin='$stockmin', stockmax='$stockmax', stockactual='$stockactual', preciocompra='$preciocompra', precioventa='$precioventa', nitproveedor='$proveedor' WHERE id='$id'");
+		$tamano=$_POST['tamano'];
+		$preciocosto=$_POST['preciocosto'];
+		$precioventa=$_POST['precioventa'];
+		$categoria=$_POST['categoria'];		
+		$proveedor=$_POST['proveedor'];	
+		$result=$con->query("UPDATE producto SET nombre='$nombre', tamano='$tamano', precio_costo='$preciocosto', precio_venta='$precioventa', codigo_categoria='$categoria', nit_proveedor='$proveedor' WHERE codigo_producto='$id'");
 	}
 ?>
 	<meta http-equiv='refresh' content='1; url=productos.php' />

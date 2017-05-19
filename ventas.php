@@ -34,6 +34,7 @@ if($_SESSION['ok']=="ok")
 					<li class="buttons">
 			    <input type="hidden" name="form_id" value="1075005" />
 			    
+			    
 				<input id="saveForm" class="button_text" type="submit" name="submit" value="Buscar" />
 		</li>
 			</ul>

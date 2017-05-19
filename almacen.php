@@ -29,7 +29,7 @@ if($_SESSION['ok']=="ok")
 	<table>
 	<tr>
 	<td><a href="personal.php">USUARIOS</a></td>
-	<td><a href="clientes.php">CLIENTES</a></td>
+	<td><a href="cliente.php">CLIENTES</a></td>
 	<td><a href="productos.php">PRODUCTOS</a></td>
 	<td><a href="proveedores.php">PROVEEDORES</a></td>
 	<td><a href="ventas.php">VENTAS</a></td>

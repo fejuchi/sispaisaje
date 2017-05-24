@@ -1,16 +1,16 @@
-<?php
+	<?php
 session_start();
 if($_SESSION['ok']=="ok")
 {
 	if($_SESSION['rol']=="Administrador")
 	{
-		if(isset($_GET['nombre']))
+		if(isset($_GET['descripcion']))
 		{
-			$nombre = $_GET['nombre'];	
+			$descripcion = $_GET['descripcion'];	
 			include("conexion.php");
 			$con=conectarse();
-			$con->query("DELETE FROM proveedor WHERE nombre='$nombre'");
-			header("Location: proveedores.php");
+			$con->query("DELETE FROM categoria WHERE descripcion='$descripcion'");
+			header("Location: categoria.php");
 		}		
 		
 	}
@@ -19,11 +19,11 @@ if($_SESSION['ok']=="ok")
 			<script language="javascript"type="text/javascript">
 						alert("Usuario no autorizado");
 			</script>
-			<meta http-equiv='refresh' content='1; url=proveedores.php' />
+			<meta http-equiv='refresh' content='1; url=categoria.php' />
 		<?php
 	}
 		?>
-		<meta http-equiv='refresh' content='0; url=proveedores.php' />
+		<meta http-equiv='refresh' content='0; url=categoria.php' />
 		<?php
 }
 else

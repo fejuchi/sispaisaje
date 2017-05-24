@@ -23,7 +23,7 @@ if($_SESSION['ok']=="ok")
 }
 else
 	{
-	  header("location: login.php");
+	  header("location: index.php");
 	}
 ?>
 <meta http-equiv='refresh' content='0; url=personal.php' />

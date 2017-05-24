@@ -1,126 +1,41 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<?php
-session_start();
-if($_SESSION['ok']=="ok")
-{
-?>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Registrar Cliente</title>
-<script type="text/javascript" language="javascript" src="js/ajax.js"></script>	
-<link rel="stylesheet" type="text/css" href="css/view.css" media="all">
-<script type="text/javascript" src="view.js"></script>
+<!doctype html>
+<html>
+<head> 
+<title> REGISTRAR CLIENTE </title>
+<html lang="es">
+<meta charset="UTF-8">
 </head>
-
-<body id="main_body" >
-	<img id="top" src="css/top.png" alt="">
-	<div id="form_container">
-	
-		<h1><a>Registrar Cliente</a></h1>
-		<form id="form_1075005" name="form5" class="appnitro"  method="post" action="registrar_cliente2.php">
-			<div class="form_description">
-			<h2>Registrar Cliente</h2>
-			<p></p>
-			</div>
-
-	<ul>
-		<li id="li_1" >
-		<label class="description" for="element_1">NIT </label>
-		<div>
-			<input id="nit_cliente" name="nit_cliente" class="element text medium" type="text" maxlength="255" value="" required /> 
-		</div> 
-		</li>
-		<li id="li_2" >
-		<label class="description" for="element_2">Nombre </label>
-		<span>
-			<input id="nombre" name= "nombre" class="element text" maxlength="255" size="20" value="" required />
-			<label>Nombres</label>
-		</span>
-		<span>
-			<input id="apellido" name= "apellido" class="element text" maxlength="255" size="20" value="" required />
-			<label>Apellidos</label>
-		</span> 
-		</li>		
-		<li id="li_3" >
-		<label class="description" for="element_3">Direccion </label>
-		<div>
-			<input id="direccion" name="direccion" class="element text medium" type="text" maxlength="255" value="" required /> 
-		</div> 
-		</li>
-		<li id="li_4" >
-		<label class="description" for="element_4">Telefono </label>
-		<div>
-			<input id="telefono" name="telefono" class="element text medium" type="text" maxlength="255" value="" required /> 
-		</div> 
-		</li>		
-		<li id="li_5" >
-		<label class="description" for="element_5">Email </label>
-		<div>
-			<input id="email" name="email" class="element text medium" type="text" maxlength="255" value="" required /> 
-		</div> 
-		</li>
-
-
-						<?php
-							include("conexion.php");
-							$con=conectarse();	
-							$result=$con->query("SELECT * FROM departamento order by nombre asc");
-						?>
-
-					<li id="li_6" >
-					<label class="description" for="element_6">Departamento </label>
-					<div>
-						<select class="" id="departamento" name="departamento"  onchange="from(document.form5.departamento.value,'midiv','registrar_cliente2.php')" required>
-
-							<option value="0">Seleccione</option>
-							<?php while ($row=mysqli_fetch_array($result)){ ?>
-							<option value="<?php echo $row['codigo_dep']?>"><?php echo $row['nombre']?></option>
-							<?php }?>				
-						</select>	
-					</div>
-					<div id="midiv">
-					</div>
-					</li>
-
-
-					<?php
-						include("conexion.php");
-						$con=conectarse();	
-						$result=$con->query("SELECT * FROM municipio where codigo_dep=".$_GET['id']);
-					?>
-						<br>
-					<li id="li_7" >
-						<label class="description" for="element_7">Municipio </label>
-						<div>
-						<select class="" id="municipio"  name="municipio" required>	
-							<?php while ($row=mysqli_fetch_array($result)){ ?>
-							<option value="<?php echo $row['codigo_mun']?>"><?php echo $row['nombre']?></option>
-							<?php }?>
-						</select>
-						</div>
-					</li>
-
-
-					<li class="buttons">
-					<input type="hidden" name="form_id" value="1075005" />
-					<input id="saveForm" class="button_text" type="submit" name="submit" value="Registrar" />
-					</li>
-
-	</ul>
-		</form>
-					<div id="footer">
-					</div>
-	</div>
-					<img id="bottom" src="css/bottom.png" alt="">
-</body>
+<body>
 
 <?php
+
+if(isset($_POST['submit']))
+{
+include("conexion.php");
+$con=conectarse();
+
+$nit_cliente=$_POST['nit_cliente'];
+$nombre=$_POST['nombre'];
+$apellido=$_POST['apellido'];
+$direccion=$_POST['direccion'];
+$telefono=$_POST['telefono'];	
+$email=$_POST['email'];	
+$codigo_mun=$_POST['municipio'];	
+
+
+$result=$con->query("INSERT INTO cliente (nit_cliente, nombre, apellido, direccion, telefono, email, codigo_mun) 
+VALUES ('$nit_cliente', '$nombre', '$apellido', '$direccion', '$telefono', '$email', '$codigo_mun')");
+if($result>=1)
+{
+	echo "<center><h1> DATOS ALMACENADOS CON EXITOS</h1></center>";
+	header("Location: cliente.php");
 }
 else
 {
-	header("location: index.php");
+	echo "<center><h1>SE HA PRODUCIDO UN ERROR</h1></center>".$con->error;
+}
 }
 ?>
+<meta http-equiv='refresh' content='1; url=cliente.php' />
+</body>
 </html>

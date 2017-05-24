@@ -16,7 +16,7 @@ if($_SESSION['ok']=="ok")
 	<link rel="stylesheet" href="css/tabla.css">
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="js/main.js"></script>
-	<title>Proveedores</title>
+	<title>Categorias</title>
 </head>
 
 <body>
@@ -27,14 +27,11 @@ if($_SESSION['ok']=="ok")
 		<aside>
 		<div class="container">
 			<div class="form__top">
-				<h2><span>Registro de Proveedor</span></h2>
+				<h2><span>Registro de Categoria</span></h2>
 			</div>		
-			<form class="form__reg"  method="post" action="registrar_proveedor.php">
-				<input class="input" id="nit" name= "nit" class="element text" type="text" value="" placeholder="NIT" required>
-				<input class="input" id="nombre" name= "nombre" class="element text" type="text" value="" placeholder="Nombre" required>
-				<input class="input" id="telefono" name= "telefono" class="element text" type="text" value="" placeholder="Teléfono" required>
-				<input class="input" id="direccion" name="direccion" class="element text" type="text"  value="" placeholder="Dirección" required>
-				<input class="input" id="email" name= "email" class="element text" type="text" value="" placeholder="Email" required>
+			<form class="form__reg"  method="post" action="registrar_categoria.php">
+				<input class="input" id="codigo_categoria" name= "codigo_categoria" class="element text" type="text" value="" placeholder="Codigo" required>
+				<input class="input" id="descripcion" name= "descripcion" class="element text" type="text" value="" placeholder="Descripcion" required>
 
 	            <div class="btn__form">
 	            	<input class="btn__submit" type="submit" name="submit" value="Registrar">
@@ -45,12 +42,12 @@ if($_SESSION['ok']=="ok")
 		</aside>
 
 		<section class="main">
-			<form id="form_1075005" class="appnitro"  method="post" action="proveedores.php">
-					<h2>Lista de Proveedores</h2>
+			<form id="form_1075005" class="appnitro"  method="post" action="categoria.php">
+					<h2>Lista de Categorias</h2>
 					<br>
 				<ul >
 					<div>
-						<input id="nombre" name="nombre" class="element text medium" type="text" maxlength="255" value="" required /> 
+						<input id="descripcion" name="descripcion" class="element text medium" type="text" maxlength="255" value="" required /> 
 					</div>
 					<br>
 
@@ -68,8 +65,8 @@ if($_SESSION['ok']=="ok")
 				{
 				include("conexion.php");
 				$con=conectarse();
-				$nombre=$_POST['nombre'];
-				$result=$con->query("SELECT * FROM proveedor WHERE nombre='$nombre'");	
+				$descripcion=$_POST['descripcion'];
+				$result=$con->query("SELECT * FROM categoria WHERE descripcion='$descripcion'");	
 			?>
 
 			<?php
@@ -79,11 +76,8 @@ if($_SESSION['ok']=="ok")
 		<table border="1" >
 			<thead>
 				<tr bgcolor="#33b5e5">
-					<th>NIT</th>
-					<th>NOMBRE</th>
-					<th>DIRECCIÓN</th>
-					<th>TELÉFONO</th>
-					<th>EMAIL</th>
+					<th>CODIGO</th>
+					<th>DESCRIPCIÓN</th>
 					<th>ACCIÓN</th>
 				</tr>
 			</thead>
@@ -94,16 +88,14 @@ if($_SESSION['ok']=="ok")
 
 			<tbody>
 				<tr>
-					<td data-label="NIT"><?php echo $row['nit_proveedor']; ?></td>
-					<td data-label="Nombre"><?php echo $row['nombre']; ?></td>
-					<td data-label="Dirección"><?php echo $row['direccion']; ?></td>
-					<td data-label="Teléfono"><?php echo $row['telefono']; ?></td>
-					<td data-label="Email"><?php echo $row['email']; ?></td>
+					<td data-label="Codigo"><?php echo $row['codigo_categoria']; ?></td>
+					<td data-label="Descripción"><?php echo $row['descripcion']; ?></td>
+
 					<td data-label="Acción">
-						<a title="Editar?" href="editar_proveedor.php? nombre=<?php echo $row['nombre']; ?>">
+						<a title="Editar?" href="editar_categoria.php? descripcion=<?php echo $row['descripcion']; ?>">
 							<font size='2'>Editar</font>	
 						</a>
-						<a title="Eliminar?" href="eliminar_proveedor.php? nombre=<?php echo $row['nombre']; ?>">
+						<a title="Eliminar?" href="eliminar_categoria.php? descripcion=<?php echo $row['descripcion']; ?>">
 							<font size='2'>Eliminar</font>
 						</a>
 					</td>  
@@ -124,7 +116,7 @@ if($_SESSION['ok']=="ok")
 			{
 				include("conexion.php");
 				$con=conectarse();
-				$result=$con->query("SELECT * FROM proveedor");
+				$result=$con->query("SELECT * FROM categoria");
 			?>
 			<?php
 			if($result->num_rows > 0)
@@ -134,11 +126,8 @@ if($_SESSION['ok']=="ok")
 		<table border="1" >
 			<thead>
 				<tr bgcolor="#33b5e5">
-					<th>NIT</th>
-					<th>NOMBRE</th>
-					<th>DIRECCIÓN</th>
-					<th>TELÉFONO</th>
-					<th>EMAIL</th>
+					<th>CODIGO</th>
+					<th>DESCRIPCIÓN</th>
 					<th>ACCIÓN</th>
 				</tr>
 			</thead>
@@ -150,17 +139,14 @@ if($_SESSION['ok']=="ok")
 
 		<tbody>	
 			<tr>
-				<td data-label="NIT"><?php echo $row['nit_proveedor']; ?></td>
-				<td data-label="Nombre"><?php echo $row['nombre']; ?></td>
-				<td data-label="Dirección"><?php echo $row['direccion']; ?></td>
-				<td data-label="Teléfono"><?php echo $row['telefono']; ?></td>
-				<td data-label="Email"><?php echo $row['email']; ?></td>
+				<td data-label="Codigo"><?php echo $row['codigo_categoria']; ?></td>
+				<td data-label="Descripción"><?php echo $row['descripcion']; ?></td>
 
 				<td data-label="Acción">
-					<a title="Editar?" href="editar_proveedor.php? nombre=<?php echo $row['nombre']; ?>">
+					<a title="Editar?" href="editar_categoria.php? descripcion=<?php echo $row['descripcion']; ?>">
 						<font size='2'>Editar</font>	
 					</a> 
-					<a title="Eliminar?" href="eliminar_proveedor.php? nombre=<?php echo $row['nombre']; ?>">
+					<a title="Eliminar?" href="eliminar_categoria.php? descripcion=<?php echo $row['descripcion']; ?>">
 						<font size='2'>Eliminar</font>
 					</a>
 				</td> 

@@ -1,199 +1,225 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <?php
 session_start();
 if($_SESSION['ok']=="ok")
 {
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+<html lang="es">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Productos</title>
-<link rel="stylesheet" type="text/css" href="css/view.css" media="all">
-<script type="text/javascript" src="view.js"></script>
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+	<link rel="stylesheet" href="css/formulario.css">
+	<link rel="stylesheet" href="css/contenedor.css">
+	<link rel="stylesheet" href="css/tabla.css">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="js/main.js"></script>
+	<title>Productos</title>
 </head>
-<body id="main_body" >
-	
-	<img id="top" src="css/top.png" alt="">
-	<div id="form_container">
-	
-		<h1><a>Productos</a></h1>
-		<form id="form_1075005" class="appnitro"  method="post" action="productos.php">
-					<div class="form_description">
-			<h2>Productos</h2><a title=" Registrar Producto Nuevo? " href="registrar_producto.php">  <img src="css/newc.jpg">  </a>
-			<p></p>
-		</div>						
-			<ul >
-			
-				
-					<li class="buttons">
-			    <input type="hidden" name="form_id" value="1075005" />
-			    
-				<input id="saveForm" class="button_text" type="submit" name="submit" value="Buscar" />
-		</li>
-			</ul>
-			
+
+<body>
+
+	<?php include("barramenu.php"); ?>	
+
+	<div class="contenedor">
+		<aside>
+		<div class="container">
+			<div class="form__top">
+				<h2><span>Registro de Productos</span></h2>
+			</div>		
+			<form class="form__reg"  method="post" action="registrar_producto.php">
+				<input class="input" id="codigo_producto" name= "codigo_producto" class="element text" type="text" value="" placeholder="Codigo" required>
+				<input class="input" id="nombre" name= "nombre" class="element text" type="text" value="" placeholder="Nombre" required>
+				<input class="input" id="tamano" name= "tamano" class="element text" type="text" value="" placeholder="Tamaño" required>
+				<input class="input" id="preciocosto" name= "preciocosto" class="element text" type="text" value="" placeholder="Precio Costo" required>
+				<input class="input" id="precioventa" name= "precioventa" class="element text" type="text" value="" placeholder="Precio Venta" required>
 		
-		</form>	
-		<div id="footer">
-			
+					<label class="description" for="element_1">Categoria </label>
+					<div>
+						<select class="input" id="categorias" name="categorias" required>
+							<?php
+							include("conexion.php");
+							$con=conectarse();	
+							$result=$con->query("SELECT * FROM categoria order by nombre asc");
+							?>
+							<option value="0" selected="selected">Seleccione</option>
+							<?php while ($row=mysqli_fetch_array($result)){ ?>
+							<option value="<?php echo $row['codigo_categoria']?>"><?php echo $row['description']?></option>
+							<?php }?>				
+						</select>
+					</div> 
+
+					<label class="description" for="element_2">Proveedor </label>
+					<div>
+						<select class="input" id="proveedores" name="proveedores" required>
+							<?php
+							//include("conexion.php");
+							//$con=conectarse();	
+							$result=$con->query("SELECT * FROM proveedor order by nombre asc");
+							?>
+							<option value="0" selected="selected">Seleccione</option>
+							<?php while ($row=mysqli_fetch_array($result)){ ?>
+							<option value="<?php echo $row['nit_proveedor']?>"><?php echo $row['nombre']?></option>
+							<?php }?>
+						</select>
+				</div> 
+
+	            <div class="btn__form">
+	            	<input class="btn__submit" type="submit" name="submit" value="Registrar">
+	            	<input class="btn__reset" type="reset" value="Limpiar">	
+	            </div>
+			</form>
 		</div>
-	</div>
-		
-	<style>
-	
-	table
-	{
-		border: 2px solid #FF8000;		
-		width: 100%;
-    }
-    
-	h3
-	{
-		color: #FF8000;
-		text-align: center;
-		text-decoration: line-through;
-	}
-	img{
-		 height: 18px;
-         width: 18px;
-	}
-	
-	</style>	
-	
-	<?php
+		</aside>
 
-		if(isset($_POST['submit']))
-		{
-			include("conexion.php");
-			$con=conectarse();
-			$id=$_POST['id'];
-			$result=$con->query("SELECT * FROM producto WHERE codigo_producto='$id' ");
-			
-	?>
-	
-	<img id="top" src="css/top.png" alt="">
-	<center><a href="almacen.php"><---</a></center>
-	<div id="form_container">
-	
-		<?php
-		if($result->num_rows > 0)
-		{
-		?>
-		
-		<table id="form_1075005" class="appnitro" cellspacing="8" cellpadding="3">
-		
-				
-		<tr bgcolor="#FF8000">
-		 <td align="center">ID</td>
-		 <td align="center">NOMBRE PRODUCTO</td>
-		 <td align="center">TAMAÑO</td>
-		 <td align="center">PRECIO COSTO</td>
-		 <td align="center">PRECIO VENTA</td>
-		 <td align="center">CATEGORIA</td>
-		 <td align="center">PROVEEDOR</td>
-		 <td align="center">< - --- - ></td>
-		</tr>
-		
-		<?php
-		$row = $result->fetch_array();
-		?>
-			
-			<tr>
-			 <td align="center"><?php echo $row['codigo_producto']; ?></td>
-			 <td align="center"><?php echo $row['nombre'];?></td>
-			 <td align="center"><?php echo $row['tamano']; ?></td>
-			 <td align="center"><?php echo $row['precio_costo']; ?></td>
-			 <td align="center"><?php echo $row['precio_venta']; ?></td>
-			 <td align="center"><?php echo $row['codigo_categoria']; ?></td>
-			 <td align="center"><?php echo $row['nit_proveedor']; ?></td>
-			 <td align="center"><a title=" Eliminar? " href="eliminar_producto.php?id=<?php echo $row['codigo_producto']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_producto.php?id=<?php echo $row['codigo_producto']; ?>">  <img src="css/edit.jpg">  </a> </td>
-			</tr>
-			<tr>
-				<td align="center" colspan="9"><a href="productos.php"><--</a></td>
-			</tr>
-		</table>	
-		
-	</div>
-      
-	<?php
-	
-		}
-		else
-		{
-			echo "<H3>SIN RESULTADOS</H3>";
-		}
-		}	
+		<section class="main">
+			<form id="form_1075005" class="appnitro"  method="post" action="productos.php">
+					<h2>Lista de Productos</h2>
+					<br>
+				<ul >
+					<div>
+						<input id="codigo_producto" name="codigo_producto" class="element text medium" type="text" maxlength="255" value="" required /> 
+						<label>Codigo de Barra</label>
+					</div>
+					<br>
 
-		if(!isset($_POST['submit']))
-		{
-			include("conexion.php");
-			$con=conectarse();
-			
-			$result=$con->query("SELECT * FROM producto");
-			
-	?>
+					<div>
+						<input id="saveForm" class="button_text" type="submit" name="submit" value="Buscar" />
+						<br>
+						<br>
+					</div>
+				</ul>
+			</form>	
+
+			<?php
+				if(isset($_POST['submit']))
+				{
+				//include("conexion.php");
+				//$con=conectarse();
+				$codigo_producto=$_POST['codigo_producto'];
+				$result=$con->query("SELECT p.*, p2.descripcion as des FROM producto p inner join categoria p2 on p.codigo_categoria=p2.codigo_categoria");
+			?>
+
+			<?php
+			if($result->num_rows > 0)
+			{
+			?>
+		<table border="1" >
+			<thead>
+				<tr bgcolor="#33b5e5">
+					<th>CODIGO</th>
+					<th>NOMBRE</th>
+					<th>PRECIO COSTO</th>
+					<th>PRECIO VENTA</th>
+					<HTML<th>CATEGORIA</th>
+					<!--<th>PROVEEDOR</th>-->
+					<th>ACCIÓN</th>
+				</tr>
+			</thead>
+		
+			<?php
+			$row = $result->fetch_array();
+			?>
+
+			<tbody>
+				<tr>
+					<td data-label="Codigo"><?php echo $row['codigo_producto']; ?></td>
+					<td data-label="Nombre"><?php echo $row['nombre'].' '.$row['tamano']; ?></td>
+					<td data-label="Precio Costo"><?php echo $row['precio_costo']; ?></td>
+					<td data-label="Precio Venta"><?php echo $row['precio_venta']; ?></td>
+					<td data-label="Categoria"><?php echo $row['des']; ?></td>
+					<!--<td data-label="Proveedor"><?php echo $row['nit_proveedor']; ?></td>-->
+					
+					<td data-label="Acción">
+						<a title="Editar?" href="editar_producto.php? codigo_producto=<?php echo $row['codigo_producto']; ?>">
+							<font size='2'>Editar</font>	
+						</a>
+						<a title="Eliminar?" href="eliminar_producto.php? codigo_producto=<?php echo $row['codigo_producto']; ?>">
+							<font size='2'>Eliminar</font>
+						</a>
+					</td>  
+				</tr>
+			</tbody>
+		</table>
 	
-	<img id="top" src="css/top.png" alt="">
-	<center><a href="almacen.php"><---</a></center>
-	<div id="form_container">
-	
-		<?php
-		if($result->num_rows > 0)
-		{
-		?>
-		
-		<table id="form_1075005" class="appnitro" cellspacing="8" cellpadding="3">
-		
-				
-		<tr bgcolor="#FF8000">
-		 <td align="center">ID</td>
-		 <td align="center">NOMBRE</td>
-		 <td align="center">TAMAÑO</td>
-		 <td align="center">PRECIO COSTO</td>
-		 <td align="center">PRECIO VENTA</td>
-		 <td align="center">CATEGORIA</td>
-		 <td align="center">PROVEEDOR</td>
-		 
-		</tr>
-		
-		<?php
-		while($row = $result->fetch_array())
-		{
-		?>
+			<?php
+			}
+			else
+			{
+				echo "<H3>SIN RESULTADOS</H3>";
+			}
+			}	
+
+			if(!isset($_POST['submit']))
+			{
+				//include("conexion.php");
+				//$con=conectarse();
+				$result=$con->query("SELECT p.*, p2.descripcion as des FROM producto p inner join categoria p2 on p.codigo_categoria=p2.codigo_categoria");
+			?>
 			
+			<?php
+			if($result->num_rows > 0)
+			{
+			?>
+		
+		<table border="1" >
+			<thead>
+				<tr bgcolor="#33b5e5">
+					<th>CODIGO</th>
+					<th>NOMBRE</th>
+					<th>PRECIO COSTO</th>
+					<th>PRECIO VENTA</th>
+					<th>CATEGORIA</th>
+					<!--<th>PROVEEDOR</th>-->
+					<th>ACCIÓN</th>
+				</tr>
+			</thead>
+		
+			<?php
+			while($row = $result->fetch_array())
+			{
+			?>
+
+		<tbody>	
 			<tr>
-			 <td align="center"><?php echo $row['codigo_producto']; ?></td>
-			 <td align="center"><?php echo $row['nombre'];?></td>
-			 <td align="center"><?php echo $row['tamano']; ?></td>
-			 <td align="center"><?php echo $row['precio_costo']; ?></td>
-			 <td align="center"><?php echo $row['precio_venta']; ?></td>
-			 <td align="center"><?php echo $row['codigo_categoria']; ?></td>
-			 <td align="center"><?php echo $row['nit_proveedor']; ?></td>
-			 
-			 <td align="center"><a title=" Eliminar? " href="eliminar_producto.php?id=<?php echo $row['codigo_producto']; ?>"><font size='5' color="#FF8071">x</font></a>&nbsp <a title=" Editar? " href="editar_producto.php?id=<?php echo $row['codigo_producto']; ?>">  <img src="css/edit.jpg">  </a> </td>
+				<td data-label="Codigo"><?php echo $row['codigo_producto']; ?></td>
+				<td data-label="Nombre"><?php echo $row['nombre'].' '.$row['tamano']; ?></td>
+				<td data-label="Precio Costo"><?php echo $row['precio_costo']; ?></td>
+				<td data-label="Precio Venta"><?php echo $row['precio_venta']; ?></td>
+				<td data-label="Categoria"><?php echo $row['des']; ?></td>
+				<!--<td data-label="Proveedor"><?php echo $row['nit_proveedor']; ?></td>-->
+
+				<td data-label="Acción">
+					<a title="Editar?" href="editar_producto.php? codigo_producto=<?php echo $row['codigo_producto']; ?>">
+						<font size='2'>Editar</font>	
+					</a> 
+					<a title="Eliminar?" href="eliminar_producto.php? codigo_producto=<?php echo $row['codigo_producto']; ?>">
+						<font size='2'>Eliminar</font>
+					</a>
+				</td> 
 			</tr>
+		</tbody>
 		<?php
 		}
 		?>		
-		</table>	
-		
-	</div>
+		</table>
       
 	<?php
 		}
 		}		
-		
 	?>	
-		
-	<img id="bottom" src="css/bottom.png" alt="">
-	<center><a href="almacen.php"><---</a></center>
-	</body>
+		</section>
+	
+</div>
+</body>
+
 <?php
 }
 else
 {
-	header("location: login.php");
+	header("location: index.php");
 }
 ?>
 </html>

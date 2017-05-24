@@ -53,7 +53,7 @@ CREATE TABLE `categoria` (
   `codigo_categoria` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(15) NOT NULL,
   PRIMARY KEY (`codigo_categoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,6 +62,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1,'BEBIDAS'),(2,'GRANOS'),(3,'DETERGENTE');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,9 +77,9 @@ CREATE TABLE `cliente` (
   `nit_cliente` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `apellido` varchar(20) NOT NULL,
-  `direccion` varchar(30) NOT NULL,
+  `direccion` varchar(60) NOT NULL,
   `telefono` varchar(8) NOT NULL,
-  `email` varchar(20) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
   `codigo_mun` int(11) NOT NULL,
   PRIMARY KEY (`nit_cliente`),
   KEY `fk_cliente_municipio1_idx` (`codigo_mun`)
@@ -91,6 +92,7 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (38598532,'EDWIN','JURACAN TOS','SECTOR ESCUELA','30109139','edwin@hotmail.com',5),(66666666,'CARLOS','CHIROY CHIROY','MONTE MERCEDES','55887778','ejemplo1@gmail.com',1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +144,7 @@ CREATE TABLE `datos_empresa` (
 
 LOCK TABLES `datos_empresa` WRITE;
 /*!40000 ALTER TABLE `datos_empresa` DISABLE KEYS */;
-INSERT INTO `datos_empresa` VALUES ('3859853-1','Distribuidora Flor del Paisaje','8a. Avenida 8-02 Zona 2 Solola','42162533','fejuchi@hotmail.com');
+INSERT INTO `datos_empresa` VALUES ('7766222-5','DISTRIBUIDORA FLOR DEL PAISAJE','5A. CALLE ZONA 1 SOLOLA','22446688','ejemploi@hotmail.com');
 /*!40000 ALTER TABLE `datos_empresa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +159,7 @@ CREATE TABLE `departamento` (
   `codigo_dep` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(15) NOT NULL,
   PRIMARY KEY (`codigo_dep`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,6 +168,7 @@ CREATE TABLE `departamento` (
 
 LOCK TABLES `departamento` WRITE;
 /*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
+INSERT INTO `departamento` VALUES (1,'SOLOLA'),(2,'QUICHE'),(3,'TOTONICAPAN'),(4,'MAZATENANGO'),(5,'QUETZALTENANGO'),(6,'GUATEMALA');
 /*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,11 +323,11 @@ DROP TABLE IF EXISTS `municipio`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `municipio` (
   `codigo_mun` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(20) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
   `codigo_dep` int(11) NOT NULL,
   PRIMARY KEY (`codigo_mun`),
   KEY `fk_municipio_departamento1_idx` (`codigo_dep`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -333,6 +336,7 @@ CREATE TABLE `municipio` (
 
 LOCK TABLES `municipio` WRITE;
 /*!40000 ALTER TABLE `municipio` DISABLE KEYS */;
+INSERT INTO `municipio` VALUES (1,'SOLOLA',1),(2,'CONCEPCION',1),(3,'NAHUALA',1),(4,'PANAJACHEL',1),(5,'SAN ANDRES SEMETABAJ',1),(6,'SAN ANTONIO PALOPO',1),(7,'SAN JOSE CHACAYA',1),(8,'SANTA CRUZ LA LAGUNA',1),(9,'SANTA LUCIA UTATLAN',1);
 /*!40000 ALTER TABLE `municipio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -344,9 +348,9 @@ DROP TABLE IF EXISTS `producto`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `producto` (
-  `codigo_producto` int(11) NOT NULL,
+  `codigo_producto` varchar(20) NOT NULL,
   `nombre` varchar(25) NOT NULL,
-  `tamaño` varchar(15) DEFAULT NULL,
+  `tamano` varchar(15) DEFAULT NULL,
   `precio_costo` decimal(10,0) NOT NULL,
   `precio_venta` decimal(10,0) NOT NULL,
   `codigo_categoria` int(11) NOT NULL,
@@ -363,6 +367,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
+INSERT INTO `producto` VALUES ('081537201443','REVIVE BEBIDA FRUTIPONCH','600 ML',5,7,1,22222222),('7501020539400','YOGHURT LALA','240 G',4,5,1,22222222);
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -378,6 +383,7 @@ CREATE TABLE `proveedor` (
   `nombre` varchar(20) NOT NULL,
   `direccion` varchar(30) NOT NULL,
   `telefono` varchar(8) NOT NULL,
+  `email` varchar(30) NOT NULL,
   PRIMARY KEY (`nit_proveedor`),
   UNIQUE KEY `nit_proveedor_UNIQUE` (`nit_proveedor`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -389,6 +395,7 @@ CREATE TABLE `proveedor` (
 
 LOCK TABLES `proveedor` WRITE;
 /*!40000 ALTER TABLE `proveedor` DISABLE KEYS */;
+INSERT INTO `proveedor` VALUES (22222222,'PESPI','GUATEMALA','11223366','ejemplo@gmail.com'),(33333333,'COCACOLA','GUATEMALA','22558877','prueba@gmail.com'),(44444444,'AMBAR','GUATEMALA','44558855','prueba1@gmail.com'),(55555555,'AZUCAR DE GUATE','GUATEMLA','87745788','prueba2@gmail.com');
 /*!40000 ALTER TABLE `proveedor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,7 +410,7 @@ CREATE TABLE `tipo_pago` (
   `idpago` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(15) NOT NULL,
   PRIMARY KEY (`idpago`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -412,6 +419,7 @@ CREATE TABLE `tipo_pago` (
 
 LOCK TABLES `tipo_pago` WRITE;
 /*!40000 ALTER TABLE `tipo_pago` DISABLE KEYS */;
+INSERT INTO `tipo_pago` VALUES (1,'EFECTIVO'),(2,'CHEQUE');
 /*!40000 ALTER TABLE `tipo_pago` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -432,7 +440,7 @@ CREATE TABLE `usuario` (
   `clave` varchar(15) NOT NULL,
   `tipousuario` varchar(15) NOT NULL,
   PRIMARY KEY (`codigo_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -441,7 +449,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Fernando','Julajuj Chiroy','Gerente','2017-05-13','fejuchi','123','Administrador');
+INSERT INTO `usuario` VALUES (1,'Fernando','Julajuj Chiroy','Gerente','2017-05-13','fejuchi','123','Administrador'),(2,'Edwin Oswaldo','Juracan Tos','Encargado','2017-05-13','edwin','123','Administrador'),(3,'Richard Dinael ','Tzoc Lacan','Supervisor','2017-05-13','dinael','123','Administrador'),(4,'prueba','prueba','prueba','2017-05-13','prueba','123','Vendedor');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -454,4 +462,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-15 22:52:31
+-- Dump completed on 2017-05-24  3:43:29

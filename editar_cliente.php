@@ -14,7 +14,7 @@ if(isset($_GET['nombre']))
 	include("conexion.php");
 	$con=conectarse();
 	$nombre=$_GET['nombre'];
-	$result=$con->query("SELECT * FROM proveedor WHERE nombre='$nombre'");
+	$result=$con->query("SELECT * FROM cliente WHERE nombre='$nombre'");
 	$row = $result->fetch_array();
 ?>
 
@@ -30,7 +30,7 @@ if(isset($_GET['nombre']))
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript" src="view.js"></script>
-	<title>Proveedores</title>
+	<title>Clientes</title>
 </head>
 
 <body>
@@ -41,14 +41,26 @@ if(isset($_GET['nombre']))
 		<aside>
 		<div class="container">
 			<div class="form__top">
-				<h2><span>Modificar Proveedor</span></h2>
+				<h2><span>Modificar Cliente</span></h2>
 			</div>		
-			<form class="form__reg"  method="post" action="editar_proveedor.php">
-				<input class="input" id="nit" name= "nit" class="element text" type="text" value="<?php echo $row['nit_proveedor']; ?>" placeholder="NIT" required>
+			<form class="form__reg"  method="post" action="editar_cliente.php">
+				<input class="input" id="nit_cliente" name= "nit_cliente" class="element text" type="text" value="<?php echo $row['nit_cliente'];?>" placeholder="NIT" required>
 				<input class="input" id="nombre" name= "nombre" class="element text" type="text" value="<?php echo $row['nombre']; ?>" placeholder="Nombre" required>
-				<input class="input" id="telefono" name= "telefono" class="element text" type="text" value="<?php echo $row['telefono']; ?>" placeholder="Teléfono" required>
+				<input class="input" id="apellido" name= "apellido" class="element text" type="text" value="<?php echo $row['apellido']; ?>" placeholder="Apellidos" required>
 				<input class="input" id="direccion" name="direccion" class="element text" type="text"  value="<?php echo $row['direccion']; ?>" placeholder="Dirección" required>
+				<input class="input" id="telefono" name= "telefono" class="element text" type="text" value="<?php echo $row['telefono']; ?>" placeholder="Teléfono" required>
 				<input class="input" id="email" name= "email" class="element text" type="text" value="<?php echo $row['email']; ?>" placeholder="Email" required>
+				<select class="input" name="municipio" name="municipio" required>
+					<?php			
+					$result2=$con->query("SELECT * FROM municipio");
+					while($row2 = $result2->fetch_array())
+					{
+					?>
+					 <option  value="<?php echo $row2['codigo_mun']; ?>"  <?php if($row['codigo_mun'] == $row2['codigo_mun']){ ?> selected <?php } ?> > <?php echo $row2['nombre']; ?> </option> 
+					<?php
+					}
+					?>
+				</select> 
 
 	            <div class="btn__form">
 	            	<input class="btn__submit" type="submit" name="submit" value="Modificar">
@@ -58,12 +70,12 @@ if(isset($_GET['nombre']))
 		</aside>
 
 		<section class="main">
-			<form id="form_1075005" class="appnitro"  method="post" action="proveedores.php">
-					<h2>Lista de Proveedores</h2>
+			<form id="form_1075005" class="appnitro"  method="post" action="cliente.php">
+					<h2>Lista de Clientes</h2>
 					<br>
 				<ul >
 					<div>
-						<input id="usuario" name="usuario" class="element text medium" type="text" maxlength="255" value="" required /> 
+						<input id="nombre" name="nombre" class="element text medium" type="text" maxlength="255" value="" required /> 
 					</div>
 					<br>
 					<div>
@@ -77,10 +89,10 @@ if(isset($_GET['nombre']))
 			<?php
 			if(isset($_POST['submit']))
 			{
-			include("conexion.php");
-			$con=conectarse();
+			//include("conexion.php");
+			//$con=conectarse();
 			$nombre=$_POST['nombre'];
-			$result=$con->query("SELECT * FROM proveedor WHERE nombre='$nombre'");
+			$result=$con->query("SELECT * FROM cliente WHERE nombre='$nombre'");
 			?>
 
 			<?php
@@ -92,7 +104,7 @@ if(isset($_GET['nombre']))
 				<tr bgcolor="#33b5e5">
 					<th>NIT</th>
 					<th>NOMBRE</th>
-					<th>DIRECCIÓN</th>
+					<th>DIRECCIÓM</th>
 					<th>TELÉFONO</th>
 					<th>EMAIL</th>
 					<th>ACCIÓN</th>
@@ -105,16 +117,17 @@ if(isset($_GET['nombre']))
 
 			<tbody>
 				<tr>
-					<td data-label="Codigo"><?php echo $row['nit_proveedor']; ?></td>
-					<td data-label="Nombre"><?php echo $row['nombre']; ?></td>
-					<td data-label="Dirección"><?php echo $row['direccion']; ?></td>
+					<td data-label="Codigo"><?php echo $row['nit_cliente']; ?></td>
+					<td data-label="Nombre"><?php echo $row['nombre'].' '.$row['apellido']; ?></td>
+					<td data-label="Dirección"><?php echo $row['direccion'].' '.$row['codigo_mun'];?></td>
 					<td data-label="Teléfono"><?php echo $row['telefono']; ?></td>
 					<td data-label="Email"><?php echo $row['email']; ?></td>
+
 					<td data-label="Acción">
-						<a title="Editar?" href="editar_proveedor.php? nombre=<?php echo $row['nombre']; ?>">
+						<a title="Editar?" href="editar_cliente.php? nombre=<?php echo $row['nombre']; ?>">
 							<font size='2'>Editar</font>	
 						</a>
-						<a title="Eliminar?" href="eliminar_proveedor.php? nombre=<?php echo $row['nombre']; ?>">
+						<a title="Eliminar?" href="eliminar_cliente.php? nombre=<?php echo $row['nombre']; ?>">
 							<font size='2'>Eliminar</font>
 						</a>
 					</td>  	 
@@ -133,8 +146,8 @@ if(isset($_GET['nombre']))
 			if(!isset($_POST['submit']))
 			{
 				/*include("conexion.php");*/
-				$con=conectarse();
-				$result=$con->query("SELECT * FROM proveedor");
+				//$con=conectarse();
+				$result=$con->query("SELECT * FROM cliente");
 			?>
 			<?php
 			if($result->num_rows > 0)
@@ -146,7 +159,7 @@ if(isset($_GET['nombre']))
 				<tr bgcolor="#33b5e5">
 					<th>NIT</th>
 					<th>NOMBRE</th>
-					<th>DIRECCIÓN</th>
+					<th>DIRECCIÓM</th>
 					<th>TELÉFONO</th>
 					<th>EMAIL</th>
 					<th>ACCIÓN</th>
@@ -160,17 +173,17 @@ if(isset($_GET['nombre']))
 
 		<tbody>	
 			<tr>
-				<td data-label="Codigo"><?php echo $row['nit_proveedor']; ?></td>
-				<td data-label="Nombre"><?php echo $row['nombre']; ?></td>
-				<td data-label="Dirección"><?php echo $row['direccion']; ?></td>
+				<td data-label="Codigo"><?php echo $row['nit_cliente']; ?></td>
+				<td data-label="Nombre"><?php echo $row['nombre'].' '.$row['apellido']; ?></td>
+				<td data-label="Dirección"><?php echo $row['direccion'].' '.$row['codigo_mun'];?></td>
 				<td data-label="Teléfono"><?php echo $row['telefono']; ?></td>
 				<td data-label="Email"><?php echo $row['email']; ?></td>
 
 				<td data-label="Acción">
-					<a title="Editar?" href="editar_proveedor.php? nombre=<?php echo $row['nombre']; ?>">
+					<a title="Editar?" href="editar_cliente.php? nombre=<?php echo $row['nombre']; ?>">
 						<font size='2'>Editar</font>	
 					</a> 
-					<a title="Eliminar?" href="eliminar_proveedor.php? nombre=<?php echo $row['nombre']; ?>">
+					<a title="Eliminar?" href="eliminar_cliente.php? nombre=<?php echo $row['nombre']; ?>">
 						<font size='2'>Eliminar</font>
 					</a>
 				</td> 
@@ -197,17 +210,19 @@ else
 	if(isset($_POST['submit']))
 	{
 		include("conexion.php");
-	    $con=conectarse();
-		$nit=$_POST['nit'];
-		$nombre=$_POST['nombre'];
-		$direccion=$_POST['direccion'];
-		$telefono=$_POST['telefono'];
-		$email=$_POST['email'];		
+			$con=conectarse();
+	    	$nit_cliente=$_POST['nit_cliente'];
+			$nombre=$_POST['nombre'];
+			$apellido=$_POST['apellido'];
+			$direccion=$_POST['direccion'];
+			$telefono=$_POST['telefono'];	
+			$email=$_POST['email'];	
+			$codigo_mun=$_POST['municipio'];	
 
-		$result=$con->query("UPDATE proveedor SET nit_proveedor='$nit', nombre='$nombre', direccion='$direccion', telefono='$telefono', email='$email' WHERE nit_proveedor='$nit'");
+		$result=$con->query("UPDATE cliente SET nit_cliente='$nit_cliente', nombre='$nombre', apellido='$apellido', direccion='$direccion', telefono='$telefono', email='$email', codigo_mun='$codigo_mun' WHERE nit_cliente='$nit_cliente'");
 	}
 ?>
-	<meta http-equiv='refresh' content='1; url=proveedores.php' />
+	<meta http-equiv='refresh' content='1; url=cliente.php' />
 <?php
 }
 ?>
@@ -219,7 +234,7 @@ else
 			<script language="javascript"type="text/javascript">
 						alert("Usuario no autorizado");
 			</script>
-			<meta http-equiv='refresh' content='0; url=proveedores.php' />
+			<meta http-equiv='refresh' content='0; url=cliente.php' />
 		<?php
 	}	
 }

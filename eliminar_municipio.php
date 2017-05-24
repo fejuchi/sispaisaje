@@ -9,8 +9,8 @@ if($_SESSION['ok']=="ok")
 			$nombre = $_GET['nombre'];	
 			include("conexion.php");
 			$con=conectarse();
-			$con->query("DELETE FROM proveedor WHERE nombre='$nombre'");
-			header("Location: proveedores.php");
+			$con->query("DELETE FROM municipio WHERE nombre='$nombre'");
+			header("Location: municipio.php");
 		}		
 		
 	}
@@ -19,11 +19,11 @@ if($_SESSION['ok']=="ok")
 			<script language="javascript"type="text/javascript">
 						alert("Usuario no autorizado");
 			</script>
-			<meta http-equiv='refresh' content='1; url=proveedores.php' />
+			<meta http-equiv='refresh' content='1; url=municipio.php' />
 		<?php
 	}
 		?>
-		<meta http-equiv='refresh' content='0; url=proveedores.php' />
+		<meta http-equiv='refresh' content='0; url=municipio.php' />
 		<?php
 }
 else

@@ -1,64 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html >
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Ingreso</title>
-<link rel="stylesheet" type="text/css" href="css/view.css" media="all">
-<script type="text/javascript" src="view.js"></script>
-
+  <meta charset="UTF-8">
+  <title>Ingreso</title>
+  <link rel="stylesheet" href="css/menu.css">
 </head>
-<body id="main_body" >
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<img id="top" src="css/top.png" alt=""></img>
 
-	<div id="form_container">
-		<center>
-			<br>
-			<img src="css/logo.png"></img>
-			<br>
-			<br>
-		</center>
-	</div>
-		<img id="top" src="css/top.png" alt=""></img>
-		<div id="form_container">
-			<div class="form_description">
-			<br>
-			<h2><center>Ingreso al Sistema</center></h2>
-			</div>
+<body>
 
-		<form id="form_1075005" class="appnitro"  method="post" action="index.php">
-							
-				<ul >	
-					<li id="li_1" >
-						<label class="description" for="element_1">Usuario </label>
-						<div>
-						<input id="usuario" name="usuario" class="element text medium" type="text" maxlength="255" value="" required /> 
-						</div> 
-					</li>		
-					<li id="li_2" >
-						<label class="description" for="element_2">Contraseña </label>
-						<div>
-						<input id="clave" name="clave" class="element text medium" type="password" maxlength="255" value="" required /> 
-						</div> 
-						<div>
-						<br>
-						<input id="saveForm" class="button_text" type="submit" name="submit" value="Aceptar" />
-						</div>
-					</li>	
-				</ul>	
-		</form>	
-		
-			<div id="footer">
-			</div>
-		</div>
-		</div>
+<div class="pen-title">
+  <h1>SistemasGT</h1><span>DISTRIBUIDORA FLOR DEL PAISAJE</span>
+</div>
+<form id="form_1075005" class="appnitro"  method="post" action="index.php">
+<div class="module form-module">
+  <div class=""></i>
+  </div>
+    <div class="form">
+      <h2><center>Ingresar al Sistema</center></h2>
+      <form>
+        <input id="usuario" name="usuario" type="text" maxlength="255" value="" required placeholder="Usuario"/>
+        <input id="clave" name="clave" type="password" maxlength="255" value="" required placeholder="Contraseña"/>
+        <button id="saveForm" class="button_text" type="submit" name="submit" value="Aceptar">Aceptar</button>
+      </form>
+    </div>
+</div>
+</form>
 </body>
-	
+
 <?php
 session_start(); // Starting Session
 $error=''; // Variable To Store Error Message
@@ -88,7 +56,7 @@ if ($rows == 1) {
 $r=$query->fetch_array();
 $nom = $r['nombre'];
 $ape = $r['apellido'];
-$rol = $r['tipousuario'];	
+$rol = $r['tipousuario']; 
 $_SESSION['ok']="ok";
 $_SESSION['ccusuario']=$username;
 $_SESSION['nomusuario']=$nom; // Initializing Session
@@ -97,12 +65,10 @@ $_SESSION['rol']=$rol;
 $query->free();
 header("location: almacen.php"); // Redirecting To Other Page
 } else {
-$error = "Username or Password is invalid";
+$error = "Usuario y clave no valido";
 header("location: index.php"); 
 }
-
 }
 }
 ?>
-
 </html>
